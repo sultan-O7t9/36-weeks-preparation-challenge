@@ -9,5 +9,51 @@ There is no automated test for this one, this is more for you to understand time
 */
 
 function calculateTime(n) {
-    return 0.01;
+    const startTime = new Date().getTime();
+    
+    let sum = 0;
+    for (let i = 1; i <= n; i++) {
+        sum += i;
+    }
+    
+    const endTime = new Date().getTime();
+    const timeInSeconds = (endTime - startTime) / 1000;
+    
+    console.log(`For n = ${n}:`);
+    console.log(`Sum = ${sum}`);
+    console.log(`Time taken: ${timeInSeconds} seconds`);
+    console.log('------------------------');
+    
+    return timeInSeconds;
 }
+
+function calculateTimeWithPerformance(n) {
+    const startTime = performance.now();
+    
+    let sum = 0;
+    for (let i = 1; i <= n; i++) {
+        sum += i;
+    }
+    
+    const endTime = performance.now();
+    const timeInSeconds = (endTime - startTime) / 1000;
+    
+    console.log(`[Performance API] For n = ${n}:`);
+    console.log(`Sum = ${sum}`);
+    console.log(`Time taken: ${timeInSeconds.toFixed(6)} seconds`);
+    console.log('------------------------');
+    
+    return timeInSeconds;
+}
+
+// Test cases
+console.log('Running test cases...\n');
+console.log('Using Date.getTime():');
+calculateTime(100);
+calculateTime(100000);
+calculateTime(1000000000);
+
+console.log('\nUsing Performance API:');
+calculateTimeWithPerformance(100);
+calculateTimeWithPerformance(100000);
+calculateTimeWithPerformance(1000000000);
